@@ -17,8 +17,14 @@ const pokemons = (await response.json()) as Pokemon[];
           id={`${pokemon.id}`}
           class="flex items-center justify-center rounded-lg p-4"
           style={{ backgroundColor: pokemon.color }}
+          transition:name={`main-${pokemon.id}`}
         >
-          <img height="224px" width="224px" src={pokemon.imageUrl} />
+          <img
+            height="224px"
+            width="224px"
+            src={pokemon.imageUrl}
+            transition:name={`image-${pokemon.id}`}
+          />
         </a>
       ))
     }
