@@ -1,7 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import type { Pokemon } from "../types";
+
+const response = await fetch("https://pokeapi.deno.dev/pokemon?limit=24");
+const pokemons = (await response.json()) as Pokemon[];
 ---
 
-<Layout title="Welcome to Astro.">
-  <main></main>
+<Layout title="Pokèdex">
+  <main
+    class="bg-neutral100 grid grid-cols-1 lg:grid-cols-4 gap-5 p-5 container mx-auto"
+  >
+    {
+      pokemons.map((pokemon) => (
+        <a
+          href={`/${pokemon.id}`}
+          id={`${pokemon.id}`}
+          class="flex items-center justify-center rounded-lg p-4"
+          style={{ backgroundColor: pokemon.color }}
+        >
+          <img height="224px" width="224px" src={pokemon.imageUrl} />
+        </a>
+      ))
+    }
+  </main>
 </Layout>
